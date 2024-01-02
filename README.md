@@ -1,4 +1,4 @@
-[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/-/modx-crosslinks-standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/modx-crosslinks-standard/)
+[![Default Lexicon](https://hosted.weblate.org/widgets/modx-extras/crosslinks/standard/svg-badge.svg)](https://hosted.weblate.org/projects/modx-extras/crosslinks/standard/)
 
 # dbAdmin
 
@@ -32,5 +32,5 @@ The project is licensed under the [GPLv2 license](https://github.com/sergant210/
 
 ## Translations
 
-Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-dbadmin-standard/) and the [Permissions Lexicon](https://hosted.weblate.org/projects/modx-extras/modx-dbadmin-permissions/)
+Translations of the package can be made for the [Default Lexicon](https://hosted.weblate.org/projects/modx-extras/dbadmin/standard/) and the [Permissions Lexicon](https://hosted.weblate.org/projects/modx-extras/dbadmin/permissions/)
 
