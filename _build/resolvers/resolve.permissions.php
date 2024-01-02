@@ -9,6 +9,31 @@
  * @var xPDOObject $object
  */
 
+$accessPolicies = [
+    [
+        'policy' => [
+            'name' => 'dbAdministrator',
+            'description' => 'dbAdministrator Access Policy with all attributes.',
+            'lexicon' => $options['namespace'] . ':permissions'
+        ],
+        'template' => [
+            'name' => 'dbAdministratorTemplate',
+            'description' => 'dbAdministrator Policy Template with all attributes.',
+            'lexicon' => $options['namespace'] . ':permissions',
+            'template_group' => '1'
+        ],
+        'permissions' => [
+            'tables_list', // modx->lexicon('dbadmin.permission.tables_list_desc');
+            'table_view', // modx->lexicon('dbadmin.permission.table_view_desc');
+            'table_save', // modx->lexicon('dbadmin.permission.table_save_desc');
+            'table_truncate', // modx->lexicon('dbadmin.permission.table_truncate_desc');
+            'table_remove', // modx->lexicon('dbadmin.permission.table_remove_desc');
+            'table_export', // modx->lexicon('dbadmin.permission.table_export_desc');
+            'sql_query_execute', // modx->lexicon('dbadmin.permission.sql_query_execute_desc');
+        ]
+    ]
+];
+
 /**
  * @param modX $modx
  * @param array $policy
@@ -102,31 +127,6 @@ function removeAccessPermission(&$modx, $policy, $template, $permission)
     }
     return true;
 }
-
-$accessPolicies = [
-    [
-        'policy' => [
-            'name' => 'dbAdministrator',
-            'description' => 'dbAdministrator Access Policy with all attributes.',
-            'lexicon' => $options['namespace'] . ':permissions'
-        ],
-        'template' => [
-            'name' => 'dbAdministratorTemplate',
-            'description' => 'dbAdministrator Policy Template with all attributes.',
-            'lexicon' => $options['namespace'] . ':permissions',
-            'template_group' => '1'
-        ],
-        'permissions' => [
-            'tables_list', // modx->lexicon('dbadmin.permission.tables_list_desc');
-            'table_view', // modx->lexicon('dbadmin.permission.table_view_desc');
-            'table_save', // modx->lexicon('dbadmin.permission.table_save_desc');
-            'table_truncate', // modx->lexicon('dbadmin.permission.table_truncate_desc');
-            'table_remove', // modx->lexicon('dbadmin.permission.table_remove_desc');
-            'table_export', // modx->lexicon('dbadmin.permission.table_export_desc');
-            'sql_query_execute', // modx->lexicon('dbadmin.permission.sql_query_execute_desc');
-        ]
-    ]
-];
 
 $success = true;
 if ($object->xpdo) {
