@@ -1,9 +1,9 @@
 <?php
 /**
- * Abstract processor
+ * Database Helper
  *
  * @package dbadmin
- * @subpackage processors
+ * @subpackage helper
  */
 
 namespace Sergant210\dbAdmin\Helper;
@@ -16,6 +16,7 @@ use PDOException;
 use Sergant210\dbAdmin\dbAdmin;
 use SimpleXMLElement;
 use xPDO;
+use xPDOCacheManager;
 
 /**
  * Class Database
@@ -98,6 +99,37 @@ class Database
     {
         $tableList = [];
         $sql = 'SHOW TABLE STATUS';
+
+        $cacheManager = $this->modx->getCacheManager();
+        if ($cacheManager) {
+            $cacheOptions = [
+                xPDO::OPT_CACHE_KEY => $this->dbadmin->namespace
+            ];
+            $omitAnalyzeInnodb = $cacheManager->get('omit_analyze_innodb', $cacheOptions);
+            if (!$omitAnalyzeInnodb) {
+                // Use ANALYZE TABLE to get the right sizes in InnoDB tables
+                try {
+                    if ($stmt = $this->modx->prepare($sql)) {
+                        $stmt->execute();
+                        $tables = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach ($tables as &$table) {
+                            if ($table['Engine'] == 'InnoDB') {
+                                $analyzeSql = 'ANALYZE TABLE ' . $table['Name'];
+                                $analyzeStmt = $this->modx->prepare($analyzeSql);
+                                $analyzeStmt->execute();
+                                $analyzeStmt->fetchAll();
+                                $omitAnalyzeInnodb = true;
+                            }
+                        }
+                    }
+                } catch (PDOException $e) {
+                    $this->modx->log(xPDO::LOG_LEVEL_ERROR, $e->getMessage(), '', 'dbAdmin');
+                }
+                $cacheManager->set('omit_analyze_innodb', $omitAnalyzeInnodb, 60, $cacheOptions);
+            }
+        }
+
         try {
             if ($stmt = $this->modx->prepare($sql)) {
                 $stmt->execute();
@@ -160,7 +192,8 @@ class Database
      * Set the table class of a dbAdminTable record
      * @param dbAdminTable $table
      */
-    public function setTableClass (dbAdminTable &$table) {
+    public function setTableClass(dbAdminTable &$table)
+    {
         $name = str_replace($this->modx->config['table_prefix'], '', $table->get('name'));
         $namespaces = $this->modx->getIterator('modNamespace');
         foreach ($namespaces as $namespace) {
