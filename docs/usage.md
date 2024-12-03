@@ -24,7 +24,7 @@ tab. In the input field at the top you can insert standard MySQL queries and
 execute them with the `Execute` button. All tables that are linked with an
 object class can be addressed with the following syntax:
 
-```
+```sql
 select pagetitle, uri from {modResource}
 ```
 
