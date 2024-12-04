@@ -8,9 +8,9 @@
 
 namespace Sergant210\dbAdmin\Processors;
 
-use Sergant210\dbAdmin\dbAdmin;
 use modProcessor;
 use modX;
+use Sergant210\dbAdmin\dbAdmin;
 
 /**
  * Class Processor
@@ -19,7 +19,7 @@ abstract class Processor extends modProcessor
 {
     public $languageTopics = ['dbadmin:default'];
 
-    /** @var dbAdmin */
+    /** @var dbAdmin $dbadmin */
     public $dbadmin;
 
     /**
@@ -27,7 +27,7 @@ abstract class Processor extends modProcessor
      * @param modX $modx A reference to the modX instance
      * @param array $properties An array of properties
      */
-    function __construct(modX &$modx, array $properties = [])
+    public function __construct(modX &$modx, array $properties = [])
     {
         parent::__construct($modx, $properties);
 
@@ -39,14 +39,11 @@ abstract class Processor extends modProcessor
      * {@inheritDoc}
      * @return bool
      */
-    public function checkPermissions() {
+    public function checkPermissions()
+    {
         return !empty($this->permission) ? $this->modx->hasPermission($this->permission) : true;
     }
 
-    /**
-     * {@inheritDoc}
-     * @return mixed
-     */
     abstract public function process();
 
     /**
