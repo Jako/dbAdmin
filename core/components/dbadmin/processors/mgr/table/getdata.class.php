@@ -97,7 +97,7 @@ class dbAdminTableDataGetListProcessor extends ObjectGetListProcessor
         if (!is_array($sortKey)) {
             $sortKey = [$sortKey];
         }
-        $sortKey = $this->modx->getSelectColumns($this->classKey, $this->getProperty('sortAlias', $this->classKey), '', $sortKey);
+        $sortKey = $this->modx->getSelectColumns($this->classKey, $this->getProperty('sortAlias'), '', $sortKey);
         $c->sortby($sortKey, $this->getProperty('dir'));
         if ($limit > 0) {
             $c->limit($limit, $start);

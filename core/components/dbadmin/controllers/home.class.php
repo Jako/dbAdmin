@@ -37,15 +37,15 @@ class dbAdminHomeManagerController extends modExtraManagerController
         $cssSourceUrl = $assetsUrl . '../../../source/css/mgr/';
 
         if ($this->dbadmin->getOption('debug') && ($assetsUrl != MODX_ASSETS_URL . 'components/dbadmin/')) {
-            $this->addCss($cssUrl . 'main.css?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'dbadmin.js?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'misc/utils.js?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'widgets/home.panel.js?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'widgets/table.window.js?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'widgets/tables.grid.js?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'widgets/sql.panel.js?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'widgets/data.grid.js?v=v' . $this->dbadmin->version);
-            $this->addJavascript($jsUrl . 'sections/home.js?v=v' . $this->dbadmin->version);
+            $this->addCss($cssSourceUrl . 'dbadmin.css?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'dbadmin.js?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'misc/utils.js?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/home.panel.js?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/table.window.js?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/tables.grid.js?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/sql.panel.js?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'widgets/data.grid.js?v=v' . $this->dbadmin->version);
+            $this->addJavascript($jsSourceUrl . 'sections/home.js?v=v' . $this->dbadmin->version);
         } else {
             $this->addCss($cssUrl . 'dbadmin.min.css?v=v' . $this->dbadmin->version);
             $this->addLastJavascript($jsUrl . 'dbadmin.min.js?v=v' . $this->dbadmin->version);

@@ -340,6 +340,54 @@ Ext.extend(dbAdmin.grid.Tables, MODx.grid.Grid, {
         });
         return true;
     },
+    setClasses: function () {
+        var register = 'mgr';
+        var topic = '/dbadmin-setclasses/';
+        var console = MODx.load({
+            xtype: 'modx-console',
+            register: register,
+            topic: topic,
+            show_filename: false,
+            clear: true,
+            listeners: {
+                complete: {
+                    fn: function () {
+                        MODx.msg.status({
+                            title: _('success'),
+                            message: _('dbadmin.setclasses_finished')
+                        });
+                    },
+                    scope: this
+                }
+            }
+        });
+        console.show(Ext.getBody());
+
+        MODx.Ajax.request({
+            url: dbAdmin.config.connectorUrl,
+            params: {
+                action: 'mgr/tables/setclasses',
+                register: register,
+                topic: topic,
+            },
+            listeners: {
+                success: {
+                    fn: function () {
+                        this.refresh();
+                    },
+                    scope: this
+                },
+                failure: {
+                    fn: function () {
+                        this.refresh();
+                    },
+                    scope: this
+                }
+            }
+        });
+
+        return true;
+    },
     getTopBar: function (config) {
         return [{
             text: _('dbadmin.db_export'),
@@ -365,6 +413,12 @@ Ext.extend(dbAdmin.grid.Tables, MODx.grid.Grid, {
                 handler: this.removeSelected,
                 scope: this
             }]
+        }, {
+            text: '<i class="icon icon-magic"></i>',
+            tooltip: _('dbadmin.table_set_classes'),
+            id: 'dbadmin-table-set-classes',
+            handler: this.setClasses,
+            scope: this
         }, '->', {
             xtype: 'textfield',
             name: 'query',

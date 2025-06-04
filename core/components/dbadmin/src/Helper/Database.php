@@ -344,7 +344,11 @@ class Database
                         if ($table != $name) {
                             continue;
                         }
-                        return (string)$object['class'];
+                        if ($this->modx->getVersionData()['version'] < 3) {
+                            return (string)$object['class'];
+                        } else {
+                            return ((string)$schema['package'] !== $package) ? rtrim($schema['package'], '\\') . '\\' . $object['class'] : $object['class'];
+                        }
                     }
                 }
             }
