@@ -28,7 +28,7 @@ dbAdmin.panel.Home = function (config) {
                         var msg = '<span style="display: inline-block; text-align: center">' +
                             '&copy; 2018-2022 by Sergey Shlokov <a href="https://github.com/sergant210" target="_blank">github.com/sergant210</a><br>' +
                             '<img src="' + dbAdmin.config.assetsUrl + 'img/mgr/treehill-studio.png" srcset="' + dbAdmin.config.assetsUrl + 'img/mgr/treehill-studio@2x.png 2x" alt="Treehill Studio" style="margin-top: 10px"><br>' +
-                            '&copy; 2023-2024 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
+                            '&copy; 2023-2025 by <a href="https://treehillstudio.com" target="_blank">treehillstudio.com</a></span>';
                         Ext.Msg.show({
                             title: _('dbadmin') + ' ' + dbAdmin.config.version,
                             msg: msg,

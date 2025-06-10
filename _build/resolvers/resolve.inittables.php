@@ -33,8 +33,7 @@ if ($object->xpdo) {
                 foreach ($tables as $name => $info) {
                     $obj = $modx->newObject('dbAdminTable');
                     $obj->set('name', $name);
-                    $obj->set('class', $info['class']);
-                    $obj->set('package', $info['package']);
+                    $this->dbadmin->database->setTableClass($obj);
                     $obj->save();
                 }
             }

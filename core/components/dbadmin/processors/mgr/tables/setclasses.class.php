@@ -34,33 +34,8 @@ class dbAdminSetClassesProcessor extends ObjectGetListProcessor
         $name = str_replace($this->modx->config['table_prefix'], '', $object->get('name'));
         $package = $object->get('package');
         if (empty($package)) {
-            /** @var modNamespace[] $namespaces */
-            $namespaces = $this->modx->getIterator('modNamespace');
-            foreach ($namespaces as $namespace) {
-                $package = $namespace->get('name');
-                try {
-                    $class = $this->dbadmin->database->getPackageClass($package, $name);
-                    if ($class) {
-                        break;
-                    }
-                } catch (Exception $e) {
-                }
-            }
-            if (!$class) {
-                foreach (['modx', 'modx.sources', 'modx.registry.db', 'modx.transport'] as $package) {
-                    try {
-                        $class = $this->dbadmin->database->getPackageClass($package, $name);
-                        if ($class) {
-                            break;
-                        }
-                    } catch (Exception $e) {
-                    }
-                }
-                if (!$class) {
-                    $package = '';
-                    $class = '';
-                }
-            }
+            /** @var dbAdminTable $object */
+            list($class, $package) = $this->dbadmin->database->setTableClass($object);
         } else {
             try {
                 $class = $this->dbadmin->database->getPackageClass($package, $name);

@@ -18,6 +18,8 @@ class dbAdminSetClassProcessor extends ObjectUpdateProcessor
     public $primaryKeyField = 'name';
     public $permission = 'table_save';
 
+    /** @var dbAdminTable $object */
+    public $object;
     /**
      * {@inheritDoc}
      * @return boolean
@@ -29,33 +31,7 @@ class dbAdminSetClassProcessor extends ObjectUpdateProcessor
             $name = str_replace($this->modx->config['table_prefix'], '', $this->object->get('name'));
             $package = $this->getProperty('package');
             if (empty($package)) {
-                /** @var modNamespace[] $namespaces */
-                $namespaces = $this->modx->getIterator('modNamespace');
-                foreach ($namespaces as $namespace) {
-                    $package = $namespace->get('name');
-                    try {
-                        $class = $this->dbadmin->database->getPackageClass($package, $name);
-                        if ($class) {
-                            break;
-                        }
-                    } catch (Exception $e) {
-                    }
-                }
-                if (!$class) {
-                    foreach (['modx', 'modx.sources', 'modx.registry.db', 'modx.transport'] as $package) {
-                        try {
-                            $class = $this->dbadmin->database->getPackageClass($package, $name);
-                            if ($class) {
-                                break;
-                            }
-                        } catch (Exception $e) {
-                        }
-                    }
-                    if (!$class) {
-                        $package = '';
-                        $class = '';
-                    }
-                }
+                list($class, $package) = $this->dbadmin->database->setTableClass($this->object);
             } else {
                 try {
                     $class = $this->dbadmin->database->getPackageClass($package, $name);

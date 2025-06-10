@@ -111,7 +111,7 @@ const bumpDocs = function () {
     return gulp.src([
         'mkdocs.yml',
     ], {base: './'})
-        .pipe(replace(/&copy; 2023(-\d{4})?/g, '&copy; ' + (year > 2023 ? '2023-' : '') + year))
+        .pipe(replace(/, 2023(-\d{4})?/g, ', ' + (year > 2023 ? '2023-' : '') + year))
         .pipe(gulp.dest('.'));
 };
 const bumpRequirements = function () {
@@ -122,7 +122,14 @@ const bumpRequirements = function () {
         .pipe(replace(/[*-] PHP (v)?\d.\d.*/g, '* PHP ' + phpversion + '+'))
         .pipe(gulp.dest('.'));
 };
-gulp.task('bump', gulp.series(bumpCopyright, bumpVersion, bumpHomepanel, bumpDocs, bumpRequirements));
+const bumpComposer = function () {
+    return gulp.src([
+        'core/components/dbadmin/composer.json',
+    ], {base: './'})
+        .pipe(replace(/"version": "\d+\.\d+\.\d+-?[0-9a-z]*"/ig, '"version": "' + pkg.version + '"'))
+        .pipe(gulp.dest('.'));
+};
+gulp.task('bump', gulp.series(bumpCopyright, bumpVersion, bumpHomepanel, bumpDocs, bumpRequirements, bumpComposer));
 
 gulp.task('watch', function () {
     // Watch .js files

@@ -6,7 +6,7 @@ edit_uri: tree/master/docs
 repo_name: 'sergant210/dbAdmin'
 repo_url: https://github.com/sergant210/dbAdmin
 
-copyright: '&copy; 2015-2022 <a href="https://github.com/sergant210">Sergey Shlokov</a>, 2023 <a href="https://github.com/Jako">Thomas Jakobi</a>'
+copyright: '&copy; 2015-2022 <a href="https://github.com/sergant210">Sergey Shlokov</a>, 2023-2025 <a href="https://github.com/Jako">Thomas Jakobi</a>'
 
 nav:
 - Description: 'index.md'

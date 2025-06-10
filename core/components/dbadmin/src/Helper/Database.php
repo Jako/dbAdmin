@@ -10,6 +10,7 @@ namespace Sergant210\dbAdmin\Helper;
 
 use dbAdminTable;
 use Exception;
+use modNamespace;
 use modX;
 use PDO;
 use PDOException;
@@ -179,11 +180,11 @@ class Database
         // Add new tables
         $diff = array_diff($dbTables, $tables);
         foreach ($diff as $table) {
-            /** @var dbAdminTable $obj */
-            $obj = $this->modx->newObject('dbAdminTable');
-            $obj->set('name', $table);
-            $this->setTableClass($obj);
-            $obj->save();
+            /** @var dbAdminTable $object */
+            $object = $this->modx->newObject('dbAdminTable');
+            $object->set('name', $table);
+            $this->setTableClass($object);
+            $object->save();
         }
         return true;
     }
@@ -191,10 +192,12 @@ class Database
     /**
      * Set the table class of a dbAdminTable record
      * @param dbAdminTable $table
+     * @return array
      */
     public function setTableClass(dbAdminTable &$table)
     {
         $name = str_replace($this->modx->config['table_prefix'], '', $table->get('name'));
+        /** @var modNamespace[] $namespaces */
         $namespaces = $this->modx->getIterator('modNamespace');
         foreach ($namespaces as $namespace) {
             $package = ($namespace->get('name') != 'core') ? $namespace->get('name') : 'modx';
@@ -224,6 +227,10 @@ class Database
                 }
             }
         }
+        return [
+            ($class && $package) ? $class : '',
+            ($class && $package) ? $package : '',
+        ];
     }
 
     /**

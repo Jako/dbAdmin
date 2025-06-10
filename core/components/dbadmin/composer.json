@@ -1,6 +1,7 @@
 {
   "name": "sergant210/dbadmin",
   "description": "Calendar management for MODX",
+  "version": "1.4.0",
   "authors": [
     {
       "name": "Sergey Shlokov",
