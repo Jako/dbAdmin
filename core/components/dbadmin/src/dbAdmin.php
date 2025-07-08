@@ -41,7 +41,7 @@ class dbAdmin
      * The version
      * @var string $version
      */
-    public $version = '1.4.0';
+    public $version = '1.3.2';
 
     /**
      * The class options
@@ -64,7 +64,6 @@ class dbAdmin
     public function __construct(modX &$modx, $options = [])
     {
         $this->modx =& $modx;
-        $this->namespace = $this->getOption('namespace', $options, $this->namespace);
 
         $corePath = $this->getOption('core_path', $options, $this->modx->getOption('core_path', null, MODX_CORE_PATH) . 'components/' . $this->namespace . '/');
         $assetsPath = $this->getOption('assets_path', $options, $this->modx->getOption('assets_path', null, MODX_ASSETS_PATH) . 'components/' . $this->namespace . '/');
