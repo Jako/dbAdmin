@@ -10,25 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Permission table_core_edit for changing MODX core tables
-- Editable primary keys and a context menu in the table data grid
+- Editable primary keys
 
 ### Changed
 
 - Database exports with mysqldump-php
 - More descriptive SQL results and error messages, results of all queries returning rows
-- Compact table data grid, that scrolls inside the window
-- Hide the actions and the SQL tab without the needed permission
-- Analyze only changed InnoDB tables
-- Install the composer dependencies on the server
+- Hide grid action and the SQL tab without the needed permission
 
 ### Fixed
 
-- Table data window in MODX 3 and editing in the table data grid
-- Wrong or missing table classes in the table data grid, the class search and SQL queries
-- Removing, renaming and truncating tables and views on MySQL errors
-- Exporting views and binary values in SQL results
-- Context menus, lexicon strings and PHP 8 errors in the tables list
-- The uninstallation removed permissions of other extras
+- Several small errors and glitches
 
 ### Security
 
