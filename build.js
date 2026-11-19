@@ -22,8 +22,10 @@ const dateStr = new Date().toISOString()
 const copyrightHolder = 'Thomas Jakobi';
 const copyrightRegex = new RegExp(`Copyright (\\d{4})(?:-\\d{4})? by ${copyrightHolder}`, 'g');
 const copyrightReplace = (match, start) => `Copyright ${parseInt(start) < currentYear ? `${start}-${currentYear}` : start} by ${copyrightHolder}`;
-const apiRegex = new RegExp(`&copy; ${startYear}(-\\d{4})?`, 'g');
-const apiReplace = `&copy; ${yearRange}`;
+// Own copyright range: after '&copy; ' or ', ', followed by a link (or 'by' and a link) and no later year on that line.
+// This skips the ranges of previous authors, e.g. '&copy; 2015 <a>Previous Author</a>, 2015-2025 <a>Treehill Studio</a>'.
+const apiRegex = new RegExp(`(?<=&copy; |, )${startYear}(-\\d{4})?(?= (by )?<a )(?![^\\n]*\\b(19|20)\\d{2}\\b)`, 'g');
+const apiReplace = yearRange;
 const banner = `/*!\n * ${packageJson.fullname} - ${packageJson.description}\n * Version: ${packageJson.version}\n * Build date: ${dateStr}\n */\n`;
 
 let versionParts = version.split('-');
