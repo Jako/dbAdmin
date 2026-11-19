@@ -61,7 +61,7 @@ class dbAdminHomeManagerController extends modExtraManagerController
         }
         $this->addHtml('<script type="text/javascript">
 		Ext.onReady(function() {
-            dbAdmin.config = ' . json_encode($this->dbadmin->options, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';
+            dbAdmin.config = ' . json_encode($this->dbadmin->getManagerOptions(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . ';
 			MODx.load({ xtype: "dbadmin-page-home"});
 		});
 		</script>');

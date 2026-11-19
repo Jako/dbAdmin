@@ -187,4 +187,22 @@ class dbAdmin
         }
         return $access;
     }
+
+    /**
+     * Get the options used by the manager scripts, so that no server paths are output in the manager
+     *
+     * @param array|null $options Options to filter instead of the class options
+     * @return array
+     */
+    public function getManagerOptions(?array $options = null): array
+    {
+        return array_intersect_key($options ?? $this->options, array_flip([
+            'assetsUrl',
+            'connectorUrl',
+            'debug',
+            'modxversion',
+            'permissions',
+            'version',
+        ]));
+    }
 }
